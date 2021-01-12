@@ -9,7 +9,7 @@ function App() {
 		<div>
 			This is a GUI wrapper for useful AOU endpoints for the Morningstar 
 			API on the RapidAPI platform. THe link is  
-			<a href="https://rapidapi.com/apidojo/api/morning-star" target='_blank'> here</a>.
+			<a rel="noreferrer" href="https://rapidapi.com/apidojo/api/morning-star" target='_blank'> here</a>.
 			<About />	
 		</div>
     </div>
