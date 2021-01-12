@@ -1,5 +1,5 @@
 import './App.css';
-import About from './components/About.jsx';
+import Main from './components';
 import React from 'react';
 
 function App() {
@@ -10,8 +10,9 @@ function App() {
 			This is a GUI wrapper for useful AOU endpoints for the Morningstar 
 			API on the RapidAPI platform. THe link is  
 			<a rel="noreferrer" href="https://rapidapi.com/apidojo/api/morning-star" target='_blank'> here</a>.
-			<About />	
 		</div>
+		<br />
+		<Main />
     </div>
   );
 }

@@ -1,15 +1,16 @@
 import React from 'react';
 import Section from './Section.jsx';
 import { getSuggestionsByAutocomplete } from '../services/morningstar.service.js';
+import PropTypes from 'prop-types';
 
-function About(){
+function About(props){
 	const [suggestion, setSuggestion]  = React.useState('');
 	const [error, setError] = React.useState('');
 
 	React.useEffect(() => {
 		(async function (){
 			try{
-				const about = await getSuggestionsByAutocomplete();
+				const about = await getSuggestionsByAutocomplete(props.name);
 				setSuggestion(about.toString());
 				setError('');
 			}
@@ -18,6 +19,7 @@ function About(){
 			}
 		})();
 	});
+
 	return ( // anchor tag works interestingly here.
 		<Section title='About'>
 			{ error && (
@@ -41,3 +43,7 @@ function About(){
 }
 
 export default About;
+
+About.propTypes = {
+	name: PropTypes.string.isRequired
+}
