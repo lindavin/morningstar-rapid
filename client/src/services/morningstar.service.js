@@ -24,9 +24,10 @@ async function getSuggestionsByAutocomplete(text){
 }
 
 // performanceId is used by morningstar api
+// Note: not every performance id will have a profile data
 async function getCompanyProfile(performanceId){
 	if(!performanceId){
-		throw new Error("In order to search we need a valid performanceId.");
+		throw new Error('Company profile data not found.');
 	}
 	const res = await axios.get(`${stockPath}/get-profile`, {
 		headers: headers,

@@ -36,12 +36,15 @@ function Main() {
 		margin: 'auto'
 	}
 
-	const getProfile = (performanceId) => () => {
+	const getProfile = (name, performanceId) => () => {
 		setCompanyProfile({});
 		setStatus('Retrieving company profile...');
 		getCompanyProfile(performanceId)
 			.then(profile => {
-				setCompanyProfile(profile);
+				setCompanyProfile({
+					name: name,
+					...profile
+				});
 				setStatus('Done!');
 			})
 			.catch(error => setRequestError(error.message))
@@ -60,15 +63,20 @@ function Main() {
 				<input type="submit" style={blockStyle} />
 			</form>
 			{suggestions.length !== 0 && suggestions.map(suggestion => (
-				<div key={suggestion.performanceId} style={{...blockStyle, marginTop: '5px', marginBottom: '5px'}}>
+				<div key={suggestion.performanceId} style={{ ...blockStyle, marginTop: '5px', marginBottom: '5px' }}>
 					<span>name: {suggestion.name} </span>
-					<button onClick={getProfile(suggestion.performanceId)}> Get profile </button>
+					<button onClick={getProfile(suggestion.name, suggestion.performanceId)}> Get profile </button>
 				</div>
 			))}
 			{ Object.keys(companyProfile).length !== 0 && (
-				<Section title='About'>
-					<p style={{ textAlign: 'left', maxWidth: '60%', margin: 'auto' }}> {companyProfile.about} </p>
-				</Section>
+				<div>
+					<Section title='Company Name'>
+						<p style={{ maxWidth: '60%', margin: 'auto' }}> {companyProfile.name} </p>
+					</Section>
+					<Section title='About'>
+						<p style={{ textAlign: 'left', maxWidth: '60%', margin: 'auto' }}> {companyProfile.about} </p>
+					</Section>
+				</div>
 			)}
 			{ requestError && (
 				<div style={{
